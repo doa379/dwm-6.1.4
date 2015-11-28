@@ -9,3 +9,8 @@ dwm-6.1 (Xft) with the following patches applied featuring:
   - Hide Vacant Tag (hide_vacant_tag).
 
 Many erroneous and silly errors and bugs fixed.
+
+Implementation improvements:
+  - Separated header specifications into its own file.
+  - Introduced triple tag history (for quick switching to last two tags as opposed to previous tag).
+  - Introduced pushup, pushdown, xadjtag (left/right scrolling) and cycling the master client (zoomfunction) functions.
