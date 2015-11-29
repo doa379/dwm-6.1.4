@@ -1,16 +1,19 @@
 /* See LICENSE file for copyright and license details. */
 #define DRW_FONT_CACHE_SIZE 32
 
-typedef struct {
+typedef struct
+{
 	unsigned long pix;
 	XftColor rgb;
 } Clr;
 
-typedef struct {
+typedef struct
+{
 	Cursor cursor;
 } Cur;
 
-typedef struct {
+typedef struct
+{
 	Display *dpy;
 	int ascent;
 	int descent;
@@ -19,13 +22,15 @@ typedef struct {
 	FcPattern *pattern;
 } Fnt;
 
-typedef struct {
+typedef struct
+{
 	Clr *fg;
 	Clr *bg;
 	Clr *border;
 } ClrScheme;
 
-typedef struct {
+typedef struct 
+{
 	unsigned int w, h;
 	Display *dpy;
 	int screen;
@@ -37,7 +42,8 @@ typedef struct {
 	Fnt *fonts[DRW_FONT_CACHE_SIZE];
 } Drw;
 
-typedef struct {
+typedef struct
+{
 	unsigned int w;
 	unsigned int h;
 } Extnts;
