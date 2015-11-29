@@ -218,7 +218,6 @@ static void tile(Monitor *);
 static void togglebar(const Arg *arg);
 static void togglefloating(const Arg *arg);
 static void toggletag(const Arg *arg);
-static void toggleview(const Arg *arg);
 static void unfocus(Client *c, Bool setfocus);
 static void unmanage(Client *c, Bool destroyed);
 static void unmapnotify(XEvent *e);
@@ -281,6 +280,7 @@ static Drw *drw;
 static Monitor *mons, *selmon;
 static Window root;
 
+/* Extended Functionality defintions */
 static Client *prevtiled(Client *c);
 static void pushup(const Arg *arg);
 static void pushdown(const Arg *arg);
