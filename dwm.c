@@ -430,7 +430,7 @@ void clientmessage(XEvent *e)
 		if(!ISVISIBLE(c)) 
 			view(&(Arg){.ui = c->tags});
 		
-		if(c->isfloating)
+		if(!c->isfixed)
 			pop(c);
 	}
 }
@@ -1763,7 +1763,7 @@ void setlayout(const Arg *arg)
 			/* selmon->sel->isfloating = True; */
 		}	
 		
-		selmon->sel->isfloating = !selmon->sel->isfloating;
+		selmon->sel->isfloating = selmon->sel->isfixed;
 		
 		arrange(selmon);
 	}
