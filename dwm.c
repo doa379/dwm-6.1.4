@@ -179,8 +179,9 @@ void arrange(Monitor *m)
 	if(m)
 		showhide(m->stack);
 
-	else for(m = mons; m; m = m->next)
-		showhide(m->stack);
+	else 
+		for(m = mons; m; m = m->next)
+			showhide(m->stack);
 	
 	if(m)
 	{
@@ -188,8 +189,9 @@ void arrange(Monitor *m)
 		restack(m);
 	} 
 	
-	else for(m = mons; m; m = m->next)
-		arrangemon(m);
+	else 
+		for(m = mons; m; m = m->next)
+			arrangemon(m);
 }
 
 void arrangemon(Monitor *m)
@@ -245,7 +247,6 @@ void buttonpress(XEvent *e)
 			/* do not reserve space for vacant tags */
 			if(!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
 				continue;
-
 
 			x += TEXTW(tags[i].name);
 		
@@ -658,6 +659,7 @@ void drawbar(Monitor *m)
 	Client *c;
 
 	resizebarwin(m);
+	
 	for(c = m->clients; c; c = c->next)
 	{
 		occ |= c->tags;
@@ -672,7 +674,7 @@ void drawbar(Monitor *m)
 		/* do not draw vacant tags */
 		if(!(occ & 1 << i || m->tagset[m->seltags] & 1 << i))
 			continue;
-
+		
 		w = TEXTW(tags[i].name);
 		drw_setscheme(drw, &scheme[(m->tagset[m->seltags] & 1 << i) ? 1 : (urg & 1 << i ? 2:0)]);
 		drw_text(drw, x, 0, w, bh, tags[i].name, 1);
@@ -691,6 +693,7 @@ void drawbar(Monitor *m)
 		/* status is only drawn on selected monitor */
 		w = TEXTW(stext);
 		x = m->ww - w;
+		
 		if(showsystray && m == systraytomon(m))
 			x -= getsystraywidth();
 
@@ -1323,7 +1326,7 @@ Client *nexttiled(Client *c)
 }
 
 void pop(Client *c)
-{
+{	
 	detach(c);
 	attach(c);
 	focus(c);
@@ -1740,25 +1743,32 @@ void setlayout(const Arg *arg)
 	selmon->lt[selmon->sellt] = selmon->pertag->ltidxs[selmon->pertag->curtag][selmon->sellt];
 	strncpy(selmon->ltsymbol, selmon->lt[selmon->sellt]->symbol, sizeof selmon->ltsymbol);
 	
-	if(!selmon->sel->isfloating || selmon->sel->isfixed)
-	/*restore last known float dimensions*/
-		resize(selmon->sel, selmon->sel->sfx, selmon->sel->sfy, 
-			selmon->sel->sfw, selmon->sel->sfh, False);
-	
-	else
+	if(selmon->sel)
 	{
-		/*save last known float dimensions*/
-		selmon->sel->sfx = selmon->sel->x;
-		selmon->sel->sfy = selmon->sel->y;
-		selmon->sel->sfw = selmon->sel->w;
-		selmon->sel->sfh = selmon->sel->h;
-	}
-
-	if(selmon->sel)	
-		arrange(selmon);
+		if(selmon->sel->isfloating || !selmon->sel->isfixed)
+		{
+			resize(selmon->sel, selmon->sel->sfx, selmon->sel->sfy, 
+				selmon->sel->sfw, selmon->sel->sfh, False);
 			
-	else 
-		drawbar(selmon);
+			/* selmon->sel->isfloating = False; */
+		}
+		
+		else
+		{   /*save last known float dimensions*/
+			selmon->sel->sfx = selmon->sel->x;
+			selmon->sel->sfy = selmon->sel->y;
+			selmon->sel->sfw = selmon->sel->w;
+			selmon->sel->sfh = selmon->sel->h;
+			
+			/* selmon->sel->isfloating = True; */
+		}	
+		
+		selmon->sel->isfloating = !selmon->sel->isfloating;
+		
+		arrange(selmon);
+	}
+			
+	else drawbar(selmon);
 }
 
 /* arg > 1.0 will set mfact absolutely */
@@ -1865,6 +1875,7 @@ void showhide(Client *c)
 	
 		if((!c->mon->lt[c->mon->sellt]->arrange || c->isfloating) && !c->isfullscreen)
 			resize(c, c->x, c->y, c->w, c->h, False);
+		
 		showhide(c->snext);
 	}
 	
@@ -2756,7 +2767,7 @@ void zoom(const Arg *arg)
 int main(int argc, char *argv[])
 {
 	if(argc == 2 && !strcmp("-v", argv[1]))
-		die("dwm-"VERSION", © 2006-2014 dwm engineers, see LICENSE for details\n");
+		die("dwm-"VERSION", © 2006-2016 dwm engineers, see LICENSE for details\n");
 	
 	else if(argc != 1)
 		die("usage: dwm [-v]\n");
