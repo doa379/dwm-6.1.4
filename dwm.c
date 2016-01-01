@@ -221,7 +221,6 @@ void buttonpress(XEvent *e)
 	Client *c;
 	Monitor *m;
 	XButtonPressedEvent *ev = &e->xbutton;
-	//const Tag *t; 
 
 	click = ClkRootWin;
 
@@ -1806,7 +1805,7 @@ void setup(void)
 	if (!drw->fontcount)
 		die("No fonts could be loaded.\n");
 
-	bh = drw->fonts[0]->h + 2;
+	bh = drw->fonts[0]->h + STATUSPAD;
 	updategeom();
 
 	/* init atoms */

@@ -1,12 +1,14 @@
 # dwm-6.1.4
 dwm (Dynamic Window Manmager) with patches and numerous fixes.
 
-dwm-6.1 (Xft) with the following patches applied featuring:
+dwm-6.1 with the following patches applied featuring:
+  - xft support
   - System Tray (systray)
   - Status Colors (statuscolors)
   - Extended Per Tag features (layout, mfact, nmaster, showbar)
   - Save Floats properly (save_floats)
-  - Hide Vacant Tag (hide_vacant_tag).
+  - Hide Vacant Tag (hide_vacant_tag)
+  - No border for single clients (single_window_no_border).
 
 Many erroneous and silly errors and bugs fixed.
 

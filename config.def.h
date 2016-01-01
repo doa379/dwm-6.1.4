@@ -1,12 +1,16 @@
 /* See LICENSE file for copyright and license details. */
 
+#define STATUSPAD	-2
+#define MFACTOR 	0.50
+#define NUMCOLORS	7
+
 static const char *fonts[] = {
-    "Sans:pixelsize=10:style=Bold",
+    "Sans:pixelsize=11:style=Bold",
     "VL Gothic:size=10.5",
     "WenQuanYi Micro Hei:size=10.5"
 };
 
-static const char dmenufont[] = "monospace-10";
+static const char dmenufont[] = "monospace-11";
 
 static const unsigned int borderpx  = 1;        	/* border pixel of windows */
 static const unsigned int snap      = 32;       	/* snap pixel */
@@ -16,9 +20,6 @@ static const Bool systraypinningfailfirst = True;   /* True: if pinning fails, d
 static const Bool showsystray       = True;     	/* False means no systray */
 static const Bool topbar            = True;     	/* False means bottom bar */
 static const Bool resizehints 		= False; 		/* True means respect size hints in tiled resizals */
-
-#define mfactor 	0.50
-#define NUMCOLORS	7
 
 static const char colors[NUMCOLORS][MAXCOLORS][8] = {
   /* border  foreground background */
@@ -36,6 +37,7 @@ static const Rule rules[] = {
 	{ "Gimp",            NULL,       NULL,       0,            	True,        -1 },
 	{ "chromium-browser",NULL,       NULL,       1 << 1,       	False,       -1 },
 	{ "Icedove",         NULL,       NULL,       1 << 2,       	True,        -1 },
+	{ "Thunderbird",     NULL,       NULL,       1 << 2,       	True,        -1 },
 	{ "Firefox",         NULL,       NULL,       1 << 3,       	False,       -1 },
 	{ "Iceweasel",       NULL,       NULL,       1 << 3,       	False,       -1 },
 	{ "XTerm",           NULL,       NULL,       1 << 8,       	False,       -1 },
@@ -52,19 +54,19 @@ static const Rule rules[] = {
 /* tagging */
 static const Tag tags[] = { 
 	/* Name	Layout	mfact      nmaster showbar*/
-	{ "\uff5e",  0,      mfactor,   1,      True  },
-	{ "\uff23",  2,      mfactor,   1,      False },
-	{ "\uff20",  0,      mfactor,   1,      True  },
+	{ "\uff5e",  0,      MFACTOR,   1,      True  },
+	{ "\uff23",  2,      MFACTOR,   1,      False },
+	{ "\uff20",  0,      MFACTOR,   1,      True  },
 	{ "\uff37",  1,      0.50,      1,      True  },
-	{ "\uff14",  1,      mfactor,   1,      True  },
-	{ "\uff15",  1,      mfactor,   1,      False },
-	{ "\uff16",  1,      mfactor,   1,      False },
-	{ "\uff17",  0,      mfactor,   1,      True  },
-	{ "\uff38",  1,      mfactor,   2,      True  },
-	{ "\uff26",  0,      mfactor,   1,      True  },
-	{ "\uff10",  0,      mfactor,   1,      True  },
-	{ "\uff37",  1,      mfactor,   1,      True  },
-	{ "\uff1d",  2,      mfactor,   1,      True  },
+	{ "\uff14",  1,      MFACTOR,   1,      True  },
+	{ "\uff15",  1,      MFACTOR,   1,      False },
+	{ "\uff16",  1,      MFACTOR,   1,      False },
+	{ "\uff17",  0,      MFACTOR,   1,      True  },
+	{ "\uff38",  1,      MFACTOR,   2,      True  },
+	{ "\uff26",  0,      MFACTOR,   1,      True  },
+	{ "\uff10",  0,      MFACTOR,   1,      True  },
+	{ "\uff37",  1,      MFACTOR,   1,      True  },
+	{ "\uff1d",  2,      MFACTOR,   1,      True  },
 };
 
 static const Layout layouts[] = {
